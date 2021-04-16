@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   reportContainer: {
     padding: "3rem",
     [theme.breakpoints.down("sm")]: {
-      padding: "0.5rem",
+      padding: "0.3rem",
     },
   },
 }));

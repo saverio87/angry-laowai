@@ -9,6 +9,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "400",
     textAlign: "center",
     fontFamily: "Montserrat",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.1rem",
+      textAlign: "center",
+      lineHeight: "1.5",
+    },
   },
 }));
 

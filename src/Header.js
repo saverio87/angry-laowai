@@ -3,12 +3,29 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Box, Hidden } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import { Link } from "react-router-dom";
+
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import logo from "../src/logo_small.png";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+
+const mainLinks = [
+  {
+    title: "Reports",
+    link: "reports",
+  },
+  {
+    title: "Submit a report",
+    link: "submit",
+  },
+  {
+    title: "FAQs",
+    link: "faq",
+  },
+];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +52,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     alignItems: "center",
   },
+  link: {
+    color: "#f9fafd",
+    fontFamily: "Montserrat",
+    fontWeight: "600",
+    textDecoration: "none",
+    fontSize: "1.1rem",
+  },
 }));
 
 export default function MenuAppBar() {
@@ -60,15 +84,30 @@ export default function MenuAppBar() {
               fontFamily="Inter"
               style={{ display: "flex", alignItems: "center" }}
             >
-              <img src={logo} style={{ width: "2rem" }} /> &nbsp;Angry Laowai
+              <img src={logo} style={{ width: "2rem" }} /> &nbsp;
+              <Link
+                to="/"
+                style={{
+                  color: "white",
+                  fontWeight: "700",
+                  textDecoration: "none",
+                  fontSize: "1.5rem",
+                }}
+              >
+                Angry Laowai
+              </Link>
             </Box>
           </Typography>
           <Hidden only={["sm", "xs"]}>
             <Typography className={classes.links}>
               <Grid container spacing={4} className={classes.linksContainer}>
-                <Grid item>Reports</Grid>
-                <Grid item>Submit a report</Grid>
-                <Grid item>FAQ</Grid>
+                {mainLinks.map((link) => (
+                  <Grid item>
+                    <Link className={classes.link} to={`/${link.link}`}>
+                      {link.title}
+                    </Link>
+                  </Grid>
+                ))}
               </Grid>
             </Typography>
           </Hidden>
@@ -85,6 +124,7 @@ export default function MenuAppBar() {
                 <MenuIcon fontSize="large" />
               </IconButton>
               <Menu
+                style={{}}
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -99,8 +139,17 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Reports</MenuItem>
-                <MenuItem onClick={handleClose}>Submit report</MenuItem>
+                {mainLinks.map((link) => (
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      className={classes.link}
+                      style={{ color: "grey" }}
+                      to={`/${link.link}`}
+                    >
+                      {link.title}
+                    </Link>
+                  </MenuItem>
+                ))}
               </Menu>
             </div>
           </Hidden>

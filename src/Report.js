@@ -49,15 +49,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
-    width: "95%",
-    borderRadius: "0rem",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
+    padding: "1rem",
     backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      borderRadius: "0rem",
-
       backgroundColor: "inherit",
       paddingLeft: "0rem",
       paddingRight: "0rem",
@@ -71,21 +65,10 @@ export const Report = ({ city, date, title, tags, report }) => {
 
   return (
     <>
-      <Grid
-        item
-        xs={12}
-        md={12}
-        lg={12}
-        xl={12}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <Grid item xs={12} md={12} lg={12} xl={12}>
         <Card className={classes.card} variant="outlined">
           <CardContent>
             <Grid container spacing={1}>
-              <Grid item xs={12} md={12}></Grid>
               <Grid item xs={12} md={12}>
                 <Typography component="div">
                   <Box className={classes.title}>{title}</Box>
