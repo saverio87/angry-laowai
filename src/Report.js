@@ -4,22 +4,10 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import {
   Box,
-  Divider,
   Card,
   Chip,
-  CardActions,
   CardContent,
   Grid,
-  Button,
-  Link,
-  Modal,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Typography,
 } from "@material-ui/core/";
 import formatDate from "./utils/formatDate";
@@ -44,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: "1.8rem",
     lineHeight: "1.3",
-    textAlign: "left",
 
     [theme.breakpoints.down("sm")]: {
       fontSize: "1.2rem",
@@ -66,12 +53,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "0rem",
     paddingLeft: "1rem",
     paddingRight: "1rem",
-
+    backgroundColor: "white",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       borderRadius: "0rem",
-      borderLeft: "0",
-      borderRight: "0",
+
       backgroundColor: "inherit",
       paddingLeft: "0rem",
       paddingRight: "0rem",

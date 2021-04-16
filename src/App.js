@@ -1,68 +1,27 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import firebase from "./firebase";
-import formatDate from "./utils/formatDate";
+import Header from "./Header";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { Report } from "./Report";
-import { Grid, Typography, Box } from "@material-ui/core/";
+import logo from "../src/logo_small.png";
+import { Container, Grid, Typography, Box } from "@material-ui/core/";
 import { SubmitReport } from "./SubmitReport";
+import { Intro } from "./Intro";
+import { ReportList } from "./ReportList";
 
-const useStyles = makeStyles((theme) => ({
-  reportContainer: {
-    padding: "3rem",
-    [theme.breakpoints.down("sm")]: {
-      padding: "0.5rem",
-    },
-  },
-}));
+const useStyles = makeStyles((theme) => ({}));
 
 function App() {
-  const [reports, setReports] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const classes = useStyles();
-
-  const getReports = () => {
-    setLoading(true);
-    ref.orderBy("date", "desc").onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setReports(items);
-      setLoading(false);
-    });
-  };
-
-  useEffect(() => {
-    getReports();
-  }, []);
-
-  const ref = firebase.firestore().collection("reports");
-
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
-
   return (
     <>
-      <Typography variant="h3">
-        <Box textAlign="center">Angry laowai</Box>
-      </Typography>
+      <Header />
+      <Box textAlign="center" style={{ padding: "2rem" }}>
+        <img src={logo} />
+      </Box>
 
-      <Grid container spacing={2} className={classes.reportContainer}>
-        {reports.map((report) => (
-          <Report
-            key={report.id}
-            city={report.city}
-            date={formatDate(report.date)}
-            tags={report.tags}
-            title={report.title}
-            report={report.report}
-          />
-        ))}
-      </Grid>
+      <Intro />
+
+      <ReportList />
+
       <Grid container style={{ height: "2rem" }} />
 
       <SubmitReport />

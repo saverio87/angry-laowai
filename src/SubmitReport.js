@@ -44,10 +44,9 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down("sm")]: {
       backgroundColor: "inherit",
-      paddingLeft: "0.3rem",
-      paddingRight: "0.3rem",
-      borderLeft: "0rem",
-      borderRight: "0rem",
+      paddingLeft: "0.1rem",
+      paddingRight: "0.1rem",
+      border: "0rem",
     },
   },
 }));
@@ -56,7 +55,7 @@ const initialState = {
   title: "",
   tags: [],
   city: "",
-  date: "",
+  date: new Date(),
   report: "",
 };
 
@@ -92,7 +91,7 @@ export const SubmitReport = () => {
   const handleDateChange = (date) => {
     setFormData({
       ...formData,
-      date: date,
+      date: date._d,
     });
   };
 
@@ -100,7 +99,7 @@ export const SubmitReport = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addReport({ ...formData, date: date._d });
+    addReport({ ...formData });
     setFormData(initialState);
   };
 
