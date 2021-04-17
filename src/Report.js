@@ -1,7 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import StyledLink from "./components/StyledLink";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import { Link } from "react-router-dom";
+
 import {
   Box,
   Card,
@@ -30,32 +33,43 @@ const useStyles = makeStyles((theme) => ({
   },
 
   title: {
-    fontSize: "1.8rem",
-    lineHeight: "1.3",
+    fontSize: "1.6rem",
+    lineHeight: "1",
+    fontWeight: "500",
+    color: "#395983",
 
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1.2rem",
+      fontSize: "1.3rem",
       lineHeight: "1.2",
     },
   },
 
   report: {
     fontSize: "1.2rem",
+    lineHeight: "1.3",
     fontWeight: "300",
     [theme.breakpoints.down("sm")]: {
       fontSize: "1rem",
-      lineHeight: "1.3",
+      lineHeight: "1.5",
     },
   },
 
   card: {
-    padding: "1rem",
-    backgroundColor: "white",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
+    paddingTop: "1rem",
+    backgroundColor: "#b0c4de10",
+    borderRadius: "0rem",
+    //borderWidth: "0.1rem 0rem 0.1rem 0rem",
+    borderColor: "gainsboro",
     [theme.breakpoints.down("sm")]: {
       backgroundColor: "inherit",
-      paddingLeft: "0rem",
-      paddingRight: "0rem",
+      padding: "0rem",
       fontSize: "1rem",
+      borderWidth: "0.1rem",
+      borderColor: "gainsboro",
+      borderTopRightRadius: "0.5rem",
+      //borderBottomRightRadius: "0.5rem",
     },
   },
 }));
@@ -71,7 +85,9 @@ export const Report = ({ city, date, title, tags, report }) => {
             <Grid container spacing={1}>
               <Grid item xs={12} md={12}>
                 <Typography component="div">
-                  <Box className={classes.title}>{title}</Box>
+                  <Box>
+                    <StyledLink className={classes.title}>{title}</StyledLink>
+                  </Box>
                 </Typography>
               </Grid>
 
@@ -93,13 +109,13 @@ export const Report = ({ city, date, title, tags, report }) => {
                 </Typography>
               </Grid>
               <Grid item xs={12} md={3} style={{ textAlign: "right" }}>
-                <Typography component="div" color="textSecondary">
-                  <Box style={{ fontSize: "1rem" }}>
+                <Typography component="div">
+                  <Box style={{ fontSize: "1rem", color: "#395983" }}>
                     <LocationOnIcon fontSize="small" /> {city}
                   </Box>
                 </Typography>
-                <Typography component="div" color="textSecondary">
-                  <Box style={{ fontSize: "1rem" }}>
+                <Typography component="div">
+                  <Box style={{ fontSize: "1rem", color: "#395983" }}>
                     <CalendarTodayIcon fontSize="small" /> {date}
                   </Box>
                 </Typography>

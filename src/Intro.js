@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   intro: {
     fontSize: "1.3rem",
-    color: "grey",
+    color: "#395983",
     fontWeight: "400",
     textAlign: "center",
     fontFamily: "Montserrat",
@@ -39,12 +39,12 @@ export const Intro = () => {
           <p>
             You do not need to sign up in order to submit a report, the only
             thing we ask is that you keep it civil at all times. We would hate
-            for out website to defy the purpose for which it was intended, which
+            for our website to defy the purpose for which it was intended, which
             is to help people, instead of creating more polarization.
           </p>
           <p style={{ color: "salmon", fontWeight: "600" }}>
             Racist remarks will not be tolerated at any time and reports
-            containing those will be immediately deleted.
+            containing them will be immediately deleted.
           </p>
           <p>
             We do believe, however, that a healthy dose of criticism is perhaps

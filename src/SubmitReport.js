@@ -35,17 +35,30 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {},
+  chip: {
+    height: "2rem",
+    fontSize: "1.3rem",
+    borderRadius: "0rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+    },
+  },
   textfield: {
     fontSize: "1.3rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+    },
   },
   paper: {
     borderRadius: "0rem",
     padding: "2rem",
+    backgroundColor: "#b0c4de10",
+    //borderWidth: "0.1rem 0rem 0.1rem 0rem",
+    borderColor: "gainsboro",
 
     [theme.breakpoints.down("sm")]: {
       backgroundColor: "inherit",
-      paddingLeft: "0.1rem",
-      paddingRight: "0.1rem",
+      padding: "0.1rem",
       border: "0rem",
     },
   },
@@ -134,7 +147,7 @@ export const SubmitReport = () => {
               onChange={onChange}
               label=""
               variant="outlined"
-              placeholder="A title / summary for your report (required*)"
+              placeholder="A title or summary for your report *"
               fullWidth
               margin="normal"
             />
@@ -150,7 +163,7 @@ export const SubmitReport = () => {
                     name="city"
                     value={city}
                     onChange={onChange}
-                    style={{ fontSize: "1.3rem" }}
+                    className={classes.textfield}
                   >
                     {cities.map((city) =>
                       city.includes("(") ? (
@@ -194,18 +207,12 @@ export const SubmitReport = () => {
                 <Box textAlign="center" style={{ padding: "0.2rem" }}>
                   <Chip
                     component="inherit"
-                    style={{
-                      fontSize: "1.3rem",
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                    }}
+                    className={classes.chip}
                     icon={<MoodBadIcon />}
                     label={tag}
                     clickable
                     onClick={() => selectChip(tag)}
                     color="primary"
-                    onDelete={handleDelete}
-                    deleteIcon={<DoneIcon />}
                     variant={
                       formData.tags.includes(tag) ? "default" : "outlined"
                     }

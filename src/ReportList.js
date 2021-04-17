@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   reportContainer: {
     padding: "3rem",
     [theme.breakpoints.down("sm")]: {
-      padding: "0.3rem",
+      padding: "0rem",
     },
   },
 }));
@@ -52,7 +52,11 @@ export const ReportList = () => {
             date={formatDate(report.date)}
             tags={report.tags}
             title={report.title}
-            report={report.report}
+            report={
+              report.report.length > 150
+                ? `${report.report.slice(0, 150)} ...`
+                : report.report
+            }
           />
         ))}
       </Grid>

@@ -4,6 +4,7 @@ import { Grid, Box, Hidden } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Link } from "react-router-dom";
+import StyledLink from "./components/StyledLink";
 
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -32,10 +33,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(0),
   },
   appBar: {
-    padding: "0.1rem",
+    padding: "0rem",
     backgroundColor: "lightsteelblue",
     color: "#f9fafd",
   },
@@ -56,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#f9fafd",
     fontFamily: "Montserrat",
     fontWeight: "600",
-    textDecoration: "none",
     fontSize: "1.1rem",
   },
 }));
@@ -103,9 +103,9 @@ export default function MenuAppBar() {
               <Grid container spacing={4} className={classes.linksContainer}>
                 {mainLinks.map((link) => (
                   <Grid item>
-                    <Link className={classes.link} to={`/${link.link}`}>
+                    <StyledLink className={classes.link} to={`/${link.link}`}>
                       {link.title}
-                    </Link>
+                    </StyledLink>
                   </Grid>
                 ))}
               </Grid>
@@ -141,13 +141,13 @@ export default function MenuAppBar() {
               >
                 {mainLinks.map((link) => (
                   <MenuItem onClick={handleClose}>
-                    <Link
+                    <StyledLink
                       className={classes.link}
                       style={{ color: "grey" }}
                       to={`/${link.link}`}
                     >
                       {link.title}
-                    </Link>
+                    </StyledLink>
                   </MenuItem>
                 ))}
               </Menu>
