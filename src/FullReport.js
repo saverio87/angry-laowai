@@ -88,9 +88,9 @@ export const FullReport = (props) => {
               <Grid item xs={12} md={12}>
                 <Typography component="div">
                   <Box>
-                    <StyledLink className={classes.title}>
+                    <Typography className={classes.title}>
                       {report.title}
-                    </StyledLink>
+                    </Typography>
                   </Box>
                 </Typography>
               </Grid>

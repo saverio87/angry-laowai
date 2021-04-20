@@ -22,7 +22,7 @@ function App() {
           <Header />
 
           <Route exact path="/" component={Intro} />
-          <Container maxWidth="lg">
+          <Container maxWidth="md">
             <Grid container style={{ height: "2rem" }} />
             {/* <Alert /> */}
             <Switch>

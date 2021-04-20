@@ -3,17 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import firebase from "./firebase";
 import formatDate from "./utils/formatDate";
 import { Report } from "./Report";
-import { Grid, Box } from "@material-ui/core/";
+import { Grid, Box, Typography } from "@material-ui/core/";
 import StyledLink from "./components/StyledLink";
 
 const useStyles = makeStyles((theme) => ({
-  reportContainer: {
-    padding: "3rem",
-    [theme.breakpoints.down("sm")]: {
-      padding: "0rem",
-    },
-  },
-
   title: {
     fontSize: "1.6rem",
     lineHeight: "1",
@@ -67,30 +60,41 @@ export const ByCity = (props) => {
 
   return (
     <>
-      <Grid container spacing={2} className={classes.reportContainer}>
+      <Grid container spacing={2}>
         {reports.length === 0 ? (
           <Box textAlign="center">
             <h1>No reports have been made in {`${city}`}</h1>
           </Box>
         ) : (
-          reports.map((report) => (
-            <Report
-              key={report.id}
-              city={report.city}
-              date={formatDate(report.date)}
-              tags={report.tags}
-              title={report.title}
-              report={report.report}
-            />
-          ))
+          <>
+            <Grid item xs={12}>
+              <Box textAlign="center" className={classes.title}>
+                We have found a total of {reports.length} reports made in{" "}
+                {`${city}`}
+              </Box>
+            </Grid>
+
+            <Grid container style={{ height: "2rem" }} />
+            {reports.map((report) => (
+              <Report
+                key={report.id}
+                city={report.city}
+                date={formatDate(report.date)}
+                tags={report.tags}
+                title={report.title}
+                report={report.report}
+              />
+            ))}
+          </>
         )}
       </Grid>
-      <Grid container style={{ height: "2rem" }} />
+      <Grid container style={{ height: "1rem" }} />
       <Box textAlign="center">
         <StyledLink className={classes.title} to="/find-report">
           Go back
         </StyledLink>
       </Box>
+      <Grid container style={{ height: "2rem" }} />
     </>
   );
 };

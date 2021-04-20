@@ -68,7 +68,12 @@ export const FindReportBy = () => {
         {/* If province is toggled off (empty string), select province */}
         {!province ? (
           <>
-            <h1>Select the province:</h1>
+            <Grid item xs={12}>
+              <Box textAlign="center" className={classes.title}>
+                Select the province:
+              </Box>
+            </Grid>
+            <Grid container style={{ height: "2rem" }} />
             <Grid container spacing={2}>
               {cities.map((province) => (
                 <Grid item xs="12" md="6" lg="4">
@@ -96,7 +101,12 @@ export const FindReportBy = () => {
         ) : (
           <>
             {/* If province is  toggled on (string value), select city */}
-            <h1>Select the city:</h1>
+            <Grid item xs={12}>
+              <Box textAlign="center" className={classes.title}>
+                Select the city:
+              </Box>
+            </Grid>
+            <Grid container style={{ height: "2rem" }} />
             <Grid container spacing={2}>
               {province.cities.map((city) => (
                 <Grid item xs="12" md="6" lg="4">

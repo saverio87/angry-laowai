@@ -11,6 +11,7 @@ const StyledLink = styled(Link)`
   &:link,
   &:active {
     text-decoration: none;
+    color: #395983;
   }
 
   &:hover {

@@ -12,6 +12,18 @@ const useStyles = makeStyles((theme) => ({
       padding: "0rem",
     },
   },
+
+  title: {
+    fontSize: "1.6rem",
+    lineHeight: "1",
+    fontWeight: "500",
+    color: "#395983",
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.3rem",
+      lineHeight: "1.2",
+    },
+  },
 }));
 
 export const ReportList = () => {
@@ -44,7 +56,13 @@ export const ReportList = () => {
 
   return (
     <>
-      <Grid container spacing={2} className={classes.reportContainer}>
+      <Grid item xs={12}>
+        <Box textAlign="center" className={classes.title}>
+          We have found a total of {reports.length} reports:
+        </Box>
+      </Grid>
+      <Grid container style={{ height: "2rem" }} />
+      <Grid container spacing={2}>
         {reports.map((report) => (
           <Report
             key={report.id}
@@ -56,6 +74,7 @@ export const ReportList = () => {
           />
         ))}
       </Grid>
+      <Grid container style={{ height: "2rem" }} />
     </>
   );
 };

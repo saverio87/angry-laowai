@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { cities } from "./utils/cities";
+import { cities, citiesArray } from "./utils/cities";
 import { reportTags } from "./utils/tags";
 import "date-fns";
 import MomentUtils from "@date-io/moment";
 import MoodBadIcon from "@material-ui/icons/MoodBad";
-import DoneIcon from "@material-ui/icons/Done";
 import { v4 as uuidv4 } from "uuid";
 import firebase from "./firebase";
 
@@ -16,12 +15,7 @@ import {
 
 import {
   Box,
-  Divider,
-  Card,
   Chip,
-  CardActions,
-  CardContent,
-  Container,
   FormControl,
   MenuItem,
   Select,
@@ -35,6 +29,19 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {},
+  title: {
+    fontSize: "2rem",
+    lineHeight: "1",
+    fontWeight: "800",
+    color: "#395983",
+    fontFamily: "Montserrat",
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+      lineHeight: "1.2",
+    },
+  },
+
   chip: {
     height: "2rem",
     fontSize: "1.3rem",
@@ -44,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   textfield: {
-    fontSize: "1.3rem",
+    fontSize: "1.2rem",
 
     [theme.breakpoints.down("sm")]: {
       fontSize: "1rem",
@@ -83,9 +90,22 @@ export const SubmitReport = () => {
 
   const ref = firebase.firestore().collection("reports");
 
-  const handleDelete = () => {
-    return;
-  };
+  // <>
+  //     <MenuItem disabled value="">
+  //       {item.province}
+  //     </MenuItem>
+  //     {item.cities.map((city) => (
+  //       <MenuItem value={city}>{city}</MenuItem>
+  //     ))}
+  //   </>
+
+  // city.includes("(") ? (
+  //   <MenuItem disabled value="">
+  //     {city}
+  //   </MenuItem>
+  // ) : (
+  //   <MenuItem value={city}>{city}</MenuItem>
+  // )
 
   // SET FORM DATA FUNCTIONS
 
@@ -128,145 +148,132 @@ export const SubmitReport = () => {
 
   return (
     <>
-      <Container maxWidth="md">
-        <form onSubmit={(e) => onSubmit(e)}>
-          <Paper variant="outlined" className={classes.paper}>
-            <Typography variant="h4">
-              <Box textAlign="center" fontFamily="Montserrat" fontWeight="800">
-                Submit a report
-              </Box>
-            </Typography>
-            <TextField
-              InputProps={{
-                classes: {
-                  root: classes.textfield,
-                },
-              }}
-              required
-              name="title"
-              value={title}
-              onChange={onChange}
-              label=""
-              placeholder="A title or summary for your report *"
-              fullWidth
-              margin="normal"
-            />
+      <Grid item xs={12}>
+        <Box textAlign="center" className={classes.title}>
+          Submit a report
+        </Box>
+      </Grid>
+      <Grid container style={{ height: "2rem" }} />
+      <form onSubmit={(e) => onSubmit(e)}>
+        <Paper variant="outlined" className={classes.paper}>
+          <TextField
+            InputProps={{
+              classes: {
+                root: classes.textfield,
+              },
+            }}
+            required
+            name="title"
+            value={title}
+            onChange={onChange}
+            label=""
+            placeholder="A title or summary for your report *"
+            fullWidth
+            margin="normal"
+          />
 
-            <Grid container spacing={1}>
-              <Grid item xs={12} md={6} style={{ paddingTop: "1.2rem" }}>
-                <FormControl
-                  // variant="outlined"
-                  className={classes.textfield}
-                  fullWidth
-                >
-                  <Select
-                    name="city"
-                    value={city}
-                    onChange={onChange}
-                    className={classes.textfield}
-                  >
-                    {cities.map((item) => (
-                      <>
-                        <MenuItem disabled value="">
-                          {item.province}
-                        </MenuItem>
-                        {item.cities.map((city) => (
-                          <MenuItem value={city}>{city}</MenuItem>
-                        ))}
-                      </>
-                    ))}
-                    {/* {cities.map((city) =>
-                      city.includes("(") ? (
-                        <MenuItem disabled value="">
-                          {city}
-                        </MenuItem>
-                      ) : (
-                        <MenuItem value={city}>{city}</MenuItem>
-                      )
-                    )} */}
-                  </Select>
-                  <FormHelperText>Where did it happen?</FormHelperText>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} md={6} style={{ paddingTop: "1.2rem" }}>
-                <Box textAlign="center">
-                  <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <KeyboardDatePicker
-                      format="YYYY-MM-DD"
-                      // inputVariant="outlined"
-                      helperText={"When did it happen?"}
-                      fullWidth
-                      InputProps={{
-                        classes: {
-                          root: classes.textfield,
-                        },
-                      }}
-                      value={date}
-                      onChange={handleDateChange}
-                    />
-                  </MuiPickersUtilsProvider>
-                </Box>
-              </Grid>
-            </Grid>
-
-            <Grid container style={{ height: "1rem" }} />
-
-            <Grid container spacing={1} justify="center">
-              {reportTags.map((tag) => (
-                <Box textAlign="center" style={{ padding: "0.2rem" }}>
-                  <Chip
-                    component="inherit"
-                    className={classes.chip}
-                    icon={<MoodBadIcon />}
-                    label={tag}
-                    clickable
-                    onClick={() => selectChip(tag)}
-                    color="primary"
-                    variant={
-                      formData.tags.includes(tag) ? "default" : "outlined"
-                    }
-                  />
-                </Box>
-              ))}
-            </Grid>
-
-            <Grid container style={{ height: "1rem" }} />
-
-            <TextField
-              InputProps={{
-                classes: {
-                  root: classes.textfield,
-                },
-              }}
-              required
-              fullWidth
-              name="report"
-              label="Report"
-              value={report}
-              onChange={onChange}
-              placeholder="Tell us what happened"
-              multiline
-              rows={10}
-              variant="outlined"
-            />
-            <Grid container style={{ height: "1rem" }} />
-            <Box textAlign="center">
-              <Button
-                type="submit"
-                variant="outlined"
-                style={{ borderRadius: "1.5rem" }}
-                size="large"
-                color="primary"
-                className={classes.button}
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={6} style={{ paddingTop: "1.2rem" }}>
+              <FormControl
+                // variant="outlined"
+                className={classes.textfield}
+                fullWidth
               >
-                Send report
-              </Button>
-            </Box>
-          </Paper>
-        </form>
-        <Grid container style={{ height: "2rem" }} />
-      </Container>
+                <Select
+                  name="city"
+                  value={city}
+                  onChange={onChange}
+                  className={classes.textfield}
+                >
+                  {citiesArray.map((city) =>
+                    city.includes("(") ? (
+                      <MenuItem disabled value="">
+                        {city.slice(0, -3)}
+                      </MenuItem>
+                    ) : (
+                      <MenuItem value={city}>{city}</MenuItem>
+                    )
+                  )}
+                </Select>
+                <FormHelperText>Where did it happen?</FormHelperText>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12} md={6} style={{ paddingTop: "1.2rem" }}>
+              <Box textAlign="center">
+                <MuiPickersUtilsProvider utils={MomentUtils}>
+                  <KeyboardDatePicker
+                    format="YYYY-MM-DD"
+                    // inputVariant="outlined"
+                    helperText={"When did it happen?"}
+                    fullWidth
+                    InputProps={{
+                      classes: {
+                        root: classes.textfield,
+                      },
+                    }}
+                    value={date}
+                    onChange={handleDateChange}
+                  />
+                </MuiPickersUtilsProvider>
+              </Box>
+            </Grid>
+          </Grid>
+
+          <Grid container style={{ height: "1rem" }} />
+
+          <Grid container spacing={1} justify="center">
+            {reportTags.map((tag) => (
+              <Box textAlign="center" style={{ padding: "0.2rem" }}>
+                <Chip
+                  component="inherit"
+                  className={classes.chip}
+                  icon={<MoodBadIcon />}
+                  label={tag}
+                  clickable
+                  onClick={() => selectChip(tag)}
+                  color="primary"
+                  variant={formData.tags.includes(tag) ? "default" : "outlined"}
+                />
+              </Box>
+            ))}
+          </Grid>
+
+          <Grid container style={{ height: "1rem" }} />
+
+          <TextField
+            InputProps={{
+              classes: {
+                root: classes.textfield,
+              },
+            }}
+            required
+            fullWidth
+            name="report"
+            label="Report"
+            value={report}
+            onChange={onChange}
+            placeholder="Tell us what happened"
+            multiline
+            rows={10}
+            variant="outlined"
+          />
+          <Grid container style={{ height: "1rem" }} />
+          <Box textAlign="center">
+            <Button
+              type="submit"
+              variant="outlined"
+              style={{ borderRadius: "1.5rem" }}
+              size="large"
+              color="primary"
+              className={classes.button}
+            >
+              Send report
+            </Button>
+          </Box>
+        </Paper>
+      </form>
+      <Grid container style={{ height: "2rem" }} />
     </>
   );
 };

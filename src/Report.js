@@ -83,6 +83,8 @@ export const Report = ({ city, date, title, tags, report }) => {
         <Card className={classes.card} variant="outlined">
           <CardContent>
             <Grid container spacing={1}>
+              {/* Title */}
+
               <Grid item xs={12} md={12}>
                 <Typography component="div">
                   <Box>
@@ -99,15 +101,8 @@ export const Report = ({ city, date, title, tags, report }) => {
                 </Typography>
               </Grid>
 
-              {/* <Grid item xs={12}>
-                <Typography component="div">
-                  <Box className={classes.report}>
-                    {report.length > 150
-                      ? `${report.slice(0, 150)} ...`
-                      : report}
-                  </Box>
-                </Typography>
-              </Grid> */}
+              {/* Tags */}
+
               <Grid item xs={12} md={9}>
                 <Typography>
                   {tags.map((tag) => (
@@ -120,10 +115,21 @@ export const Report = ({ city, date, title, tags, report }) => {
                   ))}
                 </Typography>
               </Grid>
+
+              {/* City and date */}
+
               <Grid item xs={12} md={3} style={{ textAlign: "right" }}>
                 <Typography component="div">
                   <Box style={{ fontSize: "1rem", color: "#395983" }}>
-                    <LocationOnIcon fontSize="small" /> {city}
+                    <LocationOnIcon fontSize="small" />
+                    <StyledLink
+                      to={{
+                        pathname: "/filter-city",
+                        state: { city: city },
+                      }}
+                    >
+                      {city}
+                    </StyledLink>
                   </Box>
                 </Typography>
                 <Typography component="div">
