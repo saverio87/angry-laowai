@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   textfield: {
     fontSize: "1.3rem",
+
     [theme.breakpoints.down("sm")]: {
       fontSize: "1rem",
     },
@@ -146,16 +147,15 @@ export const SubmitReport = () => {
               value={title}
               onChange={onChange}
               label=""
-              variant="outlined"
               placeholder="A title or summary for your report *"
               fullWidth
               margin="normal"
             />
 
             <Grid container spacing={1}>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} style={{ paddingTop: "1.2rem" }}>
                 <FormControl
-                  variant="outlined"
+                  // variant="outlined"
                   className={classes.textfield}
                   fullWidth
                 >
@@ -165,7 +165,17 @@ export const SubmitReport = () => {
                     onChange={onChange}
                     className={classes.textfield}
                   >
-                    {cities.map((city) =>
+                    {cities.map((item) => (
+                      <>
+                        <MenuItem disabled value="">
+                          {item.province}
+                        </MenuItem>
+                        {item.cities.map((city) => (
+                          <MenuItem value={city}>{city}</MenuItem>
+                        ))}
+                      </>
+                    ))}
+                    {/* {cities.map((city) =>
                       city.includes("(") ? (
                         <MenuItem disabled value="">
                           {city}
@@ -173,18 +183,18 @@ export const SubmitReport = () => {
                       ) : (
                         <MenuItem value={city}>{city}</MenuItem>
                       )
-                    )}
+                    )} */}
                   </Select>
                   <FormHelperText>Where did it happen?</FormHelperText>
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} style={{ paddingTop: "1.2rem" }}>
                 <Box textAlign="center">
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <KeyboardDatePicker
                       format="YYYY-MM-DD"
-                      inputVariant="outlined"
+                      // inputVariant="outlined"
                       helperText={"When did it happen?"}
                       fullWidth
                       InputProps={{
@@ -255,6 +265,7 @@ export const SubmitReport = () => {
             </Box>
           </Paper>
         </form>
+        <Grid container style={{ height: "2rem" }} />
       </Container>
     </>
   );

@@ -52,11 +52,7 @@ export const ReportList = () => {
             date={formatDate(report.date)}
             tags={report.tags}
             title={report.title}
-            report={
-              report.report.length > 150
-                ? `${report.report.slice(0, 150)} ...`
-                : report.report
-            }
+            report={report.report}
           />
         ))}
       </Grid>

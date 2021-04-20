@@ -73,9 +73,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-export const Report = ({ city, date, title, tags, report }) => {
+export const FullReport = (props) => {
   const classes = useStyles();
+
+  const report = props.history.location.state.report;
+  console.log(report);
 
   return (
     <>
@@ -86,31 +88,22 @@ export const Report = ({ city, date, title, tags, report }) => {
               <Grid item xs={12} md={12}>
                 <Typography component="div">
                   <Box>
-                    <StyledLink
-                      className={classes.title}
-                      to={{
-                        pathname: "/report",
-                        state: { report: { city, date, title, tags, report } },
-                      }}
-                    >
-                      {title}
+                    <StyledLink className={classes.title}>
+                      {report.title}
                     </StyledLink>
                   </Box>
                 </Typography>
               </Grid>
 
-              {/* <Grid item xs={12}>
+              <Grid item xs={12}>
                 <Typography component="div">
-                  <Box className={classes.report}>
-                    {report.length > 150
-                      ? `${report.slice(0, 150)} ...`
-                      : report}
-                  </Box>
+                  <Box className={classes.report}>{report.report}</Box>
                 </Typography>
-              </Grid> */}
+              </Grid>
+
               <Grid item xs={12} md={9}>
                 <Typography>
-                  {tags.map((tag) => (
+                  {report.tags.map((tag) => (
                     <Chip
                       color="primary"
                       variant="outlined"
@@ -123,12 +116,12 @@ export const Report = ({ city, date, title, tags, report }) => {
               <Grid item xs={12} md={3} style={{ textAlign: "right" }}>
                 <Typography component="div">
                   <Box style={{ fontSize: "1rem", color: "#395983" }}>
-                    <LocationOnIcon fontSize="small" /> {city}
+                    <LocationOnIcon fontSize="small" /> {report.city}
                   </Box>
                 </Typography>
                 <Typography component="div">
                   <Box style={{ fontSize: "1rem", color: "#395983" }}>
-                    <CalendarTodayIcon fontSize="small" /> {date}
+                    <CalendarTodayIcon fontSize="small" /> {report.date}
                   </Box>
                 </Typography>
               </Grid>
@@ -136,6 +129,13 @@ export const Report = ({ city, date, title, tags, report }) => {
           </CardContent>
         </Card>
       </Grid>
+      <Grid container style={{ height: "2rem" }} />
+      <Box textAlign="center">
+        <StyledLink className={classes.title} to="/reports">
+          Go back
+        </StyledLink>
+      </Box>
+      <Grid container style={{ height: "2rem" }} />
     </>
   );
 };

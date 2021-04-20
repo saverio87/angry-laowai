@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Box } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
+import logo from "../src/logo_small.png";
 
 const useStyles = makeStyles((theme) => ({
   intro: {
@@ -23,6 +24,12 @@ export const Intro = () => {
   return (
     <>
       <Container maxWidth="md">
+        <Box
+          textAlign="center"
+          style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
+        >
+          <img src={logo} />
+        </Box>
         <Box textAlign="justified" className={classes.intro}>
           <p>
             In light of the numerous reports of episodes of harassment that a
