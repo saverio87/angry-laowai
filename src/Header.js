@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     padding: "0rem",
     backgroundColor: "lightsteelblue",
+    //#395983 as an alternative
     color: "#f9fafd",
   },
   title: {

@@ -30,22 +30,22 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {},
   title: {
-    fontSize: "2rem",
+    fontSize: "3rem",
     lineHeight: "1",
-    fontWeight: "800",
+    fontWeight: "700",
     color: "#395983",
     fontFamily: "Montserrat",
 
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1.5rem",
+      fontSize: "1.8rem",
       lineHeight: "1.2",
     },
   },
 
   chip: {
-    height: "2rem",
-    fontSize: "1.3rem",
-    borderRadius: "0rem",
+    //height: "1rem",
+    fontSize: "1.2rem",
+    borderRadius: "2rem",
     [theme.breakpoints.down("sm")]: {
       fontSize: "1rem",
     },
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
-    borderRadius: "0rem",
+    borderRadius: "2rem",
     padding: "2rem",
     backgroundColor: "#b0c4de10",
     //borderWidth: "0.1rem 0rem 0.1rem 0rem",
@@ -148,14 +148,18 @@ export const SubmitReport = () => {
 
   return (
     <>
-      <Grid item xs={12}>
-        <Box textAlign="center" className={classes.title}>
-          Submit a report
-        </Box>
-      </Grid>
       <Grid container style={{ height: "2rem" }} />
       <form onSubmit={(e) => onSubmit(e)}>
         <Paper variant="outlined" className={classes.paper}>
+          <Grid
+            item
+            xs={12}
+            style={{ paddingTop: "1rem", paddingBottom: "1rem" }}
+          >
+            <Box textAlign="center" className={classes.title}>
+              Submit a report
+            </Box>
+          </Grid>
           <TextField
             InputProps={{
               classes: {
@@ -171,7 +175,6 @@ export const SubmitReport = () => {
             fullWidth
             margin="normal"
           />
-
           <Grid container spacing={1}>
             <Grid item xs={12} md={6} style={{ paddingTop: "1.2rem" }}>
               <FormControl
@@ -219,28 +222,7 @@ export const SubmitReport = () => {
               </Box>
             </Grid>
           </Grid>
-
           <Grid container style={{ height: "1rem" }} />
-
-          <Grid container spacing={1} justify="center">
-            {reportTags.map((tag) => (
-              <Box textAlign="center" style={{ padding: "0.2rem" }}>
-                <Chip
-                  component="inherit"
-                  className={classes.chip}
-                  icon={<MoodBadIcon />}
-                  label={tag}
-                  clickable
-                  onClick={() => selectChip(tag)}
-                  color="primary"
-                  variant={formData.tags.includes(tag) ? "default" : "outlined"}
-                />
-              </Box>
-            ))}
-          </Grid>
-
-          <Grid container style={{ height: "1rem" }} />
-
           <TextField
             InputProps={{
               classes: {
@@ -255,10 +237,27 @@ export const SubmitReport = () => {
             onChange={onChange}
             placeholder="Tell us what happened"
             multiline
-            rows={10}
+            rows={5}
             variant="outlined"
           />
-          <Grid container style={{ height: "1rem" }} />
+          <Grid container style={{ height: "2rem" }} />
+          <Grid container spacing={1} justify="center">
+            {reportTags.map((tag) => (
+              <Box textAlign="center" style={{ padding: "0.3rem" }}>
+                <Chip
+                  component="inherit"
+                  className={classes.chip}
+                  icon={<MoodBadIcon />}
+                  label={tag}
+                  clickable
+                  onClick={() => selectChip(tag)}
+                  color="secondary"
+                  variant={formData.tags.includes(tag) ? "default" : "outlined"}
+                />
+              </Box>
+            ))}
+          </Grid>{" "}
+          <Grid container style={{ height: "2rem" }} />
           <Box textAlign="center">
             <Button
               type="submit"
